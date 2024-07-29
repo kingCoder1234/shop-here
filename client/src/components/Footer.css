@@ -1,0 +1,36 @@
+.footer {
+  background-color: #bab7b7;
+  color: #6c757d;
+  width: 100%;
+  position: relative;
+}
+
+.footer a {
+  color: #6c757d;
+}
+
+.footer button {
+  background-color: #54456b;
+  border: none;
+}
+
+.footer button:hover {
+  background-color: #3a2e46;
+}
+
+/* Ensure footer sticks to bottom of viewport if content height is insufficient */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  margin-top: 50px;
+}

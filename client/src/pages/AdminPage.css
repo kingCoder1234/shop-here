@@ -1,0 +1,19 @@
+.sidebar-col {
+    background-color: #f8f9fa;
+    height: 100vh;
+    padding: 1rem;
+  }
+  
+  .content-col {
+    padding: 2rem;
+  }
+  
+  .nav-link.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .nav-link {
+    margin-bottom: 0.5rem;
+  }
+  
