@@ -217,7 +217,6 @@ const ManageUsers = () => {
       )}
 
       {/* Add User Modal */}
-      {/* Add User Modal */}
       <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Add New User</Modal.Title>

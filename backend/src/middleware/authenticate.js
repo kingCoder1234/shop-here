@@ -7,8 +7,11 @@ const authenticate = async (req, res, next) => {
     if (!authHeader) {
       return res.status(401).send('Authorization header missing');
     }
-
+    
     const token = authHeader.replace('Bearer ', '');
+    if(token==null){
+      return res.status(402).send('Invalid Token')
+    }
     const verifyToken = jwt.verify(token, process.env.MY_SECRET_KEY);
 
     const user = await User.findOne({
@@ -27,7 +30,7 @@ const authenticate = async (req, res, next) => {
     next();
   } catch (error) {
     res.status(401).send('Unauthorized: Invalid token');
-    console.error(error);
+    console.error("Authorization error");
   }
 };
 

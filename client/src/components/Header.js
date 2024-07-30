@@ -49,28 +49,11 @@ const Header = () => {
               </Link>
             </li>
             {isAdmin && (
-              <>
-                <li className="nav-item">
-                  <Link to="/admin" className="nav-link">
-                    Admin Panel
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/manage-users" className="nav-link">
-                    Manage Users
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/reports" className="nav-link">
-                    Reports
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/settings" className="nav-link">
-                    Settings
-                  </Link>
-                </li>
-              </>
+              <li className="nav-item">
+                <Link to="/admin" className="nav-link">
+                  Admin Panel
+                </Link>
+              </li>
             )}
             <li className="nav-item">
               <Link to="/about" className="nav-link">
@@ -83,12 +66,12 @@ const Header = () => {
               <>
                 <li className="nav-item">
                   <Link to="/profile" className="nav-link">
-                    <i className="fa fa-user"></i> {user.name}
+                    <i className="fa fa-user" aria-hidden="true"></i> {user.name}
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/cart" className="nav-link position-relative">
-                    <i className="fa fa-shopping-cart"></i>
+                    <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                     {cartItemCount > 0 && (
                       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         {cartItemCount}
@@ -98,7 +81,7 @@ const Header = () => {
                 </li>
                 <li className="nav-item">
                   <Link to="/" className="nav-link" onClick={handleUserLogout}>
-                    <i className="fa fa-sign-out mx-3"></i>
+                    <i className="fa fa-sign-out mx-3" aria-hidden="true"></i>
                   </Link>
                 </li>
               </>
@@ -106,12 +89,12 @@ const Header = () => {
               <>
                 <li className="nav-item">
                   <Link to="/login" className="nav-link">
-                    <i className="fa fa-sign-in"></i> Login
+                    <i className="fa fa-sign-in" aria-hidden="true"></i> Login
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/signup" className="nav-link">
-                    <i className="fa fa-user-plus"></i> Sign Up
+                    <i className="fa fa-user-plus" aria-hidden="true"></i> Sign Up
                   </Link>
                 </li>
               </>

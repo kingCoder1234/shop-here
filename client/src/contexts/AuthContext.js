@@ -3,7 +3,6 @@ import {
   fetchUsers,
   getProfile,
   login,
-  // logout,
   signup,
   updateProfile,
   editUser,
@@ -37,7 +36,7 @@ export const AuthProvider = ({ children }) => {
       console.error("Failed to fetch users:", error);
     }
   };
-  const handleSignup = async (name, email, age, password) => {
+  const handleSignup = async (name, email, password, age) => {
     try {
       const newUser = await signup(name, email, age, password);
       setUser(newUser);
@@ -56,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   const handleLogin = async (email, password) => {
     try {
       const loggedInUser = await login(email, password);
-      setUser(loggedInUser);
+      setUser(loggedInUser.user);
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -120,7 +119,6 @@ export const AuthProvider = ({ children }) => {
   };
   const handleLogout = async () => {
     try {
-      // await logout();
       localStorage.removeItem("token");
       setUser(null);
     } catch (error) {

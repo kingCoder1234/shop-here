@@ -25,6 +25,11 @@ export const fetchProducts = async () => {
 };
 
 export const addProduct = async (product) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const response = await axios.post(
       `${API_BASE_URL}/addproduct`,
@@ -39,6 +44,11 @@ export const addProduct = async (product) => {
 };
 
 export const fetchProductById = async (id) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const response = await axios.get(
       `${API_BASE_URL}/products/${id}`,
@@ -52,6 +62,11 @@ export const fetchProductById = async (id) => {
 };
 
 export const updateProduct = async (id, updatedProduct) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const response = await axios.put(
       `${API_BASE_URL}/updateproduct/${id}`,
@@ -66,6 +81,11 @@ export const updateProduct = async (id, updatedProduct) => {
 };
 
 export const deleteProduct = async (id) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     await axios.delete(`${API_BASE_URL}/deleteproduct/${id}`, getAuthConfig());
     return { message: "Product deleted successfully" };
@@ -76,6 +96,11 @@ export const deleteProduct = async (id) => {
 };
 
 export const addToCart = async (productId) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const user = await getProfile();
     const response = await axios.post(
@@ -91,10 +116,20 @@ export const addToCart = async (productId) => {
 };
 
 export const checkout = async (cartItems) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   alert("CheckOut successfully", cartItems);
 };
 
 export const getCart = async () => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const user = await getProfile();
     const response = await axios.get(
@@ -109,6 +144,11 @@ export const getCart = async () => {
 };
 
 export const updateCartQuantity = async (productId, quantity) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const user = await getProfile();
     const response = await axios.put(
@@ -124,6 +164,11 @@ export const updateCartQuantity = async (productId, quantity) => {
 };
 
 export const removeCartItem = async (productId) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const user = await getProfile();
     const response = await axios.delete(
@@ -138,6 +183,11 @@ export const removeCartItem = async (productId) => {
 };
 
 export const clearCart = async () => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const user = await getProfile();
     const response = await axios.delete(

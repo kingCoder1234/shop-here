@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import "./Product.css";
 import { useCartContext } from "../../contexts/CartContext";
@@ -7,14 +7,21 @@ import { getProfile } from "../../services/authService";
 
 const Product = ({ product }) => {
   const { addToCart } = useCartContext();
+  const navigate = useNavigate();
 
-  const handleAddToCart = () => {
-    if (getProfile()) {
-      if (product) {
-        addToCart(product._id);
+  const handleAddToCart = async () => {
+    try {
+      const profile = await getProfile();
+      if (profile) {
+        if (product) {
+          addToCart(product._id);
+        }
+      } else {
+        navigate("/login");
       }
-    } else {
-      alert("You need to be logged in to add items to the cart.");
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+      navigate("/login");
     }
   };
 

@@ -5,16 +5,20 @@ import { toast } from "react-toastify";
 const API_BASE_URL = "http://localhost:5000/api";
 const getToken = () => localStorage.getItem("token");
 
-export const getAuthConfig = () => {
-  const token = getToken();
-  return {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-};
+const getAuthConfig = () => ({
+  headers: {
+    Authorization: `Bearer ${getToken()}`,
+    "Content-Type": "application/json",
+  },
+});
+
 // Users
 export const fetchUsers = async () => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const response = await axios.get(`${API_BASE_URL}/users`, getAuthConfig());
     return response.data;
@@ -25,17 +29,26 @@ export const fetchUsers = async () => {
 };
 // Add New User
 export const addNewUser = async (name, email, role, age, password) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
-    const response = await axios.post(`${API_BASE_URL}/users`, {
-      name,
-      email,
-      age,
-      role,
-      password,
-      isVerified: "true",
-      shoppingCart: [],
-      tokens: [],
-    });
+    const response = await axios.post(
+      `${API_BASE_URL}/users`,
+      {
+        name,
+        email,
+        age,
+        role,
+        password,
+        isVerified: "true",
+        shoppingCart: [],
+        tokens: [],
+      },
+      getAuthConfig()
+    );
     return response.data;
   } catch (error) {
     throw error.response ? error.response.data : error;
@@ -66,6 +79,11 @@ export const verifyEmail = async (code) => {
 };
 // Edit User
 export const editUser = async (userId, userData) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const response = await axios.put(
       `${API_BASE_URL}/users/${userId}`,
@@ -79,6 +97,11 @@ export const editUser = async (userId, userData) => {
 };
 // Delete User
 export const deleteUser = async (userId) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const response = await axios.delete(
       `${API_BASE_URL}/users/${userId}`,
@@ -97,7 +120,6 @@ export const login = async (email, password) => {
       email,
       password,
     });
-    console.log(response.data)
     localStorage.setItem("token", response.data.token);
     if (response.status === 200) {
       toast.success(response.data.message);
@@ -109,6 +131,11 @@ export const login = async (email, password) => {
 };
 // Get User Profile
 export const getProfile = async () => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
     const response = await axios.get(
       `${API_BASE_URL}/users/me`,
@@ -121,6 +148,11 @@ export const getProfile = async () => {
 };
 // Update User Profile
 export const updateProfile = async (updatedFields) => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   const user = await getProfile();
   try {
     const response = await axios.put(
@@ -135,15 +167,15 @@ export const updateProfile = async (updatedFields) => {
 };
 // Logout
 export const logout = async () => {
+  const token = getToken();
+  if (!token) {
+    console.error("No token found, cannot logout.");
+    return;
+  }
   try {
-    const response = await axios.post(
-      `${API_BASE_URL}/users/logout`,
-      {},
-      getAuthConfig()
-    );
+    await axios.post(`${API_BASE_URL}/logout`, {}, getAuthConfig());
     localStorage.removeItem("token");
-    return response.data;
   } catch (error) {
-    throw error.response ? error.response.data : error;
+    console.error("Logout error:", error);
   }
 };

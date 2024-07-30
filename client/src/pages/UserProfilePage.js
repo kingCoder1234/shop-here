@@ -102,6 +102,7 @@ const UserProfilePage = () => {
               <ul className="list-unstyled">
                 <li className="mb-3">
                   <h5 className="profile-name">Name: {user.name}</h5>
+                  <h5 className="profile-name">Role: {user.role}</h5>
                 </li>
                 <li className="mb-3">
                   <p className="profile-email">E-mail: {user.email}</p>
