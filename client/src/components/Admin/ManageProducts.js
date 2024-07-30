@@ -77,6 +77,13 @@ const ManageProducts = () => {
       <Row>
         <Col>
           <h1 className="mb-4">Manage Products</h1>
+          <Button
+            variant="primary"
+            className="mt-4"
+            onClick={() => setShowAddModal(true)}
+          >
+            Add New Product
+          </Button>
           {loading ? (
             <div
               className="d-flex justify-content-center align-items-center"
@@ -135,13 +142,6 @@ const ManageProducts = () => {
           ) : (
             <Alert variant="info">No products found.</Alert>
           )}
-          <Button
-            variant="primary"
-            className="mt-4"
-            onClick={() => setShowAddModal(true)}
-          >
-            Add New Product
-          </Button>
 
           {/* Add Product Modal */}
           <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
