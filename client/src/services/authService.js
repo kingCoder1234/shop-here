@@ -2,7 +2,7 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://shop-here-gerz.onrender.com/api";
 const getToken = () => localStorage.getItem("token");
 
 const getAuthConfig = () => ({
